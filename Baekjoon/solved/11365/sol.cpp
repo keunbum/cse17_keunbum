@@ -1,15 +1,16 @@
 #include <iostream>
+#include <string>
 #include <algorithm>
-#include <vector>
-#include <utility>
 
 using namespace std;
 
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(0);
-  int n;
-  cin >> n;
-//cerr << (float)clock()/CLOCKS_PER_SEC << " seconds." << '\n';
+  string a;
+  while (getline(cin, a) && a != "END") {
+    reverse(a.begin(), a.end());
+    cout << a << '\n';
+  }
   return 0;
 }

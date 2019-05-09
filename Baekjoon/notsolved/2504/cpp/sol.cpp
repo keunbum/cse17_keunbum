@@ -32,6 +32,5 @@ int main() {
     }
   }
   cout << (top == 0 ? ans : 0) << '\n';
-//cerr << (float)clock()/CLOCKS_PER_SEC << " seconds." << '\n';
   return 0;
 }

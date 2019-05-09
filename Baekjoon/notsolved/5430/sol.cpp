@@ -38,7 +38,7 @@ int main() {
         break; 
       }
     }
-    if (!ok) cout << "error" << '\n';
+    if (!ok) cerr << "error" << '\n';
     else {
       n = a.size();
       cout << '[';
@@ -56,6 +56,5 @@ int main() {
       cout << ']' << '\n';
     }
   }
-//cerr << (float)clock()/CLOCKS_PER_SEC << " seconds." << '\n';
   return 0;
 }

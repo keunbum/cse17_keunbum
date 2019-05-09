@@ -14,9 +14,6 @@ int main() {
     cin >> a[i].first >> a[i].second;
   }
   sort(a.begin(), a.end(), [&](auto &a, auto &b) { if (a.second == b.second) return a.first < b.first; return a.second < b.second; });
-  /*for (int i = 0; i < n; i++) {
-    cerr << i << ": " << a[i].first << ' ' << a[i].second << '\n';
-  }*/
   int ans = 1, e = a[0].second;
   for (int i = 1; i < n; i++) {
     if (e <= a[i].first) { e = a[i].second; ans++; }

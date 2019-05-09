@@ -29,6 +29,5 @@ int main() {
   for (i = s; !d[n / 2][i]; i--)
     ;
   cout << s - i << '\n'; 
-//cerr << (float)clock()/CLOCKS_PER_SEC << " seconds." << '\n';
   return 0;
 }

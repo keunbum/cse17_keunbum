@@ -30,6 +30,5 @@ int main() {
    ans = min(ans, abs(s[0] - s[1])); 
   } while (next_permutation(b, b + n));
   cout << ans << '\n';
-//cerr << (float)clock()/CLOCKS_PER_SEC << " seconds." << '\n';
   return 0;
 }

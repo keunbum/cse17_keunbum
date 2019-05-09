@@ -43,6 +43,5 @@ int main() {
   cout << i - 4000 << '\n';
   cout << (v.size() == 1 ? v[0] : v[1]) - 4000 << '\n';
   cout << mx - mn << '\n';
-//cerr << (float)clock()/CLOCKS_PER_SEC << " seconds." << '\n';
   return 0;
 }

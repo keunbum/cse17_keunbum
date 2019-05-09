@@ -31,6 +31,5 @@ int main() {
     int ans = dp[1][n] - ac[n];
     cout << ans << '\n';
   }
-//cerr << (float)clock()/CLOCKS_PER_SEC << " seconds." << '\n';
   return 0;
 }

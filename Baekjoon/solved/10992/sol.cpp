@@ -17,6 +17,5 @@ int main() {
   }
   string b(2 * n - 1, '*');
   if (n > 1) cout << b << '\n';
-//cerr << (float)clock()/CLOCKS_PER_SEC << " seconds." << '\n';
   return 0;
 }

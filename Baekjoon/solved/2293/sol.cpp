@@ -19,6 +19,5 @@ int main() {
     }
   }
   cout << dp[k] << '\n';
-//cerr << (float)clock()/CLOCKS_PER_SEC << " seconds." << '\n';
   return 0;
 }
