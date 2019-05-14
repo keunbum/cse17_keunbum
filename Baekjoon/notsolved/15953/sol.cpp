@@ -27,6 +27,5 @@ int main() {
     cin >> a >> b;
     cout << (f17[a] + f18[b]) * 10000 << '\n';
   }
-//cerr << (float)clock()/CLOCKS_PER_SEC << " seconds." << '\n';
   return 0;
 }

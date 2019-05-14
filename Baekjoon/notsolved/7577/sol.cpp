@@ -17,6 +17,5 @@ int main() {
     a.emplace_back(x, y, r);
   }
   sort(a.begin(), a.end());
-//cerr << (float)clock()/CLOCKS_PER_SEC << " seconds." << '\n';
   return 0;
 }
