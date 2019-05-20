@@ -21,7 +21,7 @@ int main() {
     }
     int ans = 1, mn = a[1];
     for (int i = 2; i <= n; i++) {
-      if (mn > a[i]) { mn = a[i]; ans++; }
+      if (mn > a[i]) { mn = a[i]; ans++; cerr << i << '\n';}
     }
     cout << ans << '\n';
   }

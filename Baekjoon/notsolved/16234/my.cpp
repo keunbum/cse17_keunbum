@@ -60,6 +60,5 @@ int main() {
     ans++;
   }
   cout << ans << '\n';
-//cerr << (float)clock()/CLOCKS_PER_SEC << " seconds." << '\n';
   return 0;
 }

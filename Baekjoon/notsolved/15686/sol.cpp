@@ -52,6 +52,5 @@ int main() {
   vector<int> a;
   bt(m, a);
   cout << ans << '\n';
-//cerr << (float)clock()/CLOCKS_PER_SEC << " seconds." << '\n';
   return 0;
 }

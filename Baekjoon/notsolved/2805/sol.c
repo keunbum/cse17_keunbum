@@ -25,6 +25,5 @@ int main() {
     ans = (b + e) / 2;
     int f = b_s(a + b
   }
-//fprintf(stderr, "%f seconds.\n", (float)clock()/CLOCKS_PER_SEC);
   return 0;
 }

@@ -27,6 +27,5 @@ int main() {
     else e = ans - 1;
   }
   cout << ans << '\n';
-//cerr << (float)clock()/CLOCKS_PER_SEC << " seconds." << '\n';
   return 0;
 }
