@@ -2,7 +2,7 @@
 #include <iostream>
 #include <algorithm>
 
-#define KOO 100000
+#define KOO 1000000
 
 using namespace std;
 
@@ -24,13 +24,13 @@ int main() {
         ans = 0;
         min = 100001;
         for (int i = 0; i < n; i++) {
-            int mn = min;
+            //int mn = min;
             if (min > score[i] % KOO) {
                 ans++;
                 min = score[i] % KOO;
-                cerr << "current min = " << mn << "\t\t";
-                cerr << "score[i] = " << score[i] << "\t\t";
-                cerr << (i) << '\n';
+                //cerr << "current min = " << mn << "\t\t";
+                //cerr << "score[i] = " << score[i] << "\t\t";
+                //cerr << (i) << '\n';
             }
         }
         cout << ans << endl;
