@@ -16,7 +16,6 @@ public class Main {
     solver.solve(1, in, out);
     out.close();
   }
-
   static class TaskA {
     public void solve(int testNumber, InputReader in, PrintWriter out) {
     }
@@ -25,12 +24,10 @@ public class Main {
   static class InputReader {
     public BufferedReader reader;
     public StringTokenizer tokenizer;
-
     public InputReader(InputStream stream) {
       reader = new BufferedReader(new InputStreamReader(stream), 32768);
       tokenizer = null;
     }
-
     public String next() {
       while (tokenizer == null || !tokenizer.hasMoreTokens()) {
         try {
@@ -41,7 +38,6 @@ public class Main {
       }
       return tokenizer.nextToken();
     }
-
     public int nextInt() {
       return Integer.parseInt(next());
     }
