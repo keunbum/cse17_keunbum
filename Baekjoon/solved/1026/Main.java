@@ -5,7 +5,37 @@ public class Main {
   public static void main(String[] args) {
     InputReader in = new InputReader(System.in);
     PrintWriter out = new PrintWriter(System.out);
+    int n = in.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = in.nextInt();
+    }
+    int[] b = new int[n];
+    for (int i = 0; i < n; i++) {
+      b[i] = in.nextInt();
+    }
+    selectSort(a);
+    selectSort(b);
+    int ans = 0;
+    for (int i = 0; i < n; i++) {
+      ans += a[i] * b[n - 1 - i];
+    }
+    out.println(ans);
     out.close();
+  }
+  static void selectSort(int[] a) {
+    int n = a.length;
+    for (int i = n - 1; i > 0; i--) {
+      int max_i = i;
+      for (int j = i - 1; j >= 0; j--) {
+        if (a[j] > a[max_i]) {
+          max_i = j;
+        }
+      }
+      int t = a[i];
+      a[i] = a[max_i];
+      a[max_i] = t;
+    }
   }
   static class InputReader {
     public BufferedReader reader;

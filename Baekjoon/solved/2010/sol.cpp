@@ -5,11 +5,14 @@ using namespace std;
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(0);
-  int d, k;
-  cin >> d >> k;
-  while (d--) {
-    int r, p;
-    cin >> r >> p;
+  int n;
+  cin >> n;
+  int ans = 1 - n;
+  while (n--) {
+    int t;
+    cin >> t;
+    ans += t;
   }
+  cout << ans << '\n';
   return 0;
 }

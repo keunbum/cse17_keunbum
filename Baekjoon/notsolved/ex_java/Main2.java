@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.util.StringTokenizer;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 
 public class Main {
   public static void main(String[] args) {
@@ -17,43 +16,18 @@ public class Main {
     solver.solve(1, in, out);
     out.close();
   }
-
   static class TaskA {
     public void solve(int testNumber, InputReader in, PrintWriter out) {
-      int[] a = new int[9];
-      int sum = 0;
-      for (int i = 0; i < 9; i++) {
-        a[i] = in.nextInt();
-        sum += a[i];
-      }
-      sum -= 100;
-      boolean found = false;
-      for (int i = 0; i < 8; i++)
-        for (int j = i + 1; j < 9; j++) {
-          if (a[i] + a[j] == sum) {
-            a[i] = 100;
-            a[j] = 100;
-            found = true;
-            break;
-          }
-          if (found)
-            break;
-        }
-      Arrays.sort(a);
-      for (int i = 0; i < 7; i++)
-        out.println(a[i]);
     }
   }
 
   static class InputReader {
     public BufferedReader reader;
     public StringTokenizer tokenizer;
-
     public InputReader(InputStream stream) {
       reader = new BufferedReader(new InputStreamReader(stream), 32768);
       tokenizer = null;
     }
-
     public String next() {
       while (tokenizer == null || !tokenizer.hasMoreTokens()) {
         try {
@@ -64,7 +38,6 @@ public class Main {
       }
       return tokenizer.nextToken();
     }
-
     public int nextInt() {
       return Integer.parseInt(next());
     }

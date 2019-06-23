@@ -1,10 +1,11 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
+public class Main2 {
   public static void main(String[] args) {
     InputReader in = new InputReader(System.in);
     PrintWriter out = new PrintWriter(System.out);
+
     out.close();
   }
   static class InputReader {
