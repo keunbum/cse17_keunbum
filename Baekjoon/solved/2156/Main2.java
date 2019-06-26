@@ -1,26 +1,29 @@
-import java.io.OutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
-import java.util.StringTokenizer;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.util.*;
 
-public class Main {
+public class Main2 {
   public static void main(String[] args) {
-    InputStream inputStream = System.in;
-    OutputStream outputStream = System.out;
-    InputReader in = new InputReader(inputStream);
-    PrintWriter out = new PrintWriter(outputStream);
-    TaskA solver = new TaskA();
-    solver.solve(1, in, out);
+    InputReader in = new InputReader(System.in);
+    PrintWriter out = new PrintWriter(System.out);
+    int n = in.nextInt();
+    int[] a = new int[n + 2];
+    for (int i = 1; i <= n; i++) {
+      a[i] = in.nextInt();
+    }
+    int[][] f = new int[2][n + 2];
+    f[0][1] = a[1];
+    f[0][2] = a[2];
+    f[1][2] = a[1] + a[2];
+    for (int i = 3; i <= n + 1; i++) {
+      f[0][i] = max3(f[0][i - 2], f[1][i - 2], f[1][i - 3]) + a[i];
+      f[1][i] = f[0][i - 1] + a[i];
+    }
+    out.println(max3(f[0][n + 1], f[1][n + 1], f[1][n])); 
     out.close();
   }
-  static class TaskA {
-    public void solve(int testNumber, InputReader in, PrintWriter out) {
-    }
+  public static int max3(int a, int b, int c) {
+    return Math.max(Math.max(a, b), c);
   }
-
   static class InputReader {
     public BufferedReader reader;
     public StringTokenizer tokenizer;

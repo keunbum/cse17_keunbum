@@ -18,6 +18,24 @@ public class Main {
   }
   static class TaskA {
     public void solve(int testNumber, InputReader in, PrintWriter out) {
+      String[] a = new String[]{"baby", "sukhwan", "very", "cute", "in", "bed", "baby", "sukhwan"}; 
+      int n = in.nextInt() - 1;
+      int t = n % 14;
+      n /= 14;
+      if ((t & 3) < 2) {
+        out.println(a[t >> 2 << 1 | t & 1]);
+      } else {
+        out.print("tu");
+        n += 4 - (t & 3);
+        if (n >= 5) {
+          out.println("+ru*" + n);
+        } else {
+          while (n-- > 0) {
+            out.print("ru");
+          }
+          out.println();
+        }
+      }
     }
   }
 

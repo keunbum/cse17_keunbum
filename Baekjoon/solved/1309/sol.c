@@ -1,18 +1,15 @@
 #include <stdio.h>
 
-#define N 123123
-#define md 9901
-
-int a[N][2];
+int a[123456];
 
 int main() {
   int n;
   scanf("%d", &n);
-  a[0][0] = a[0][1] = 1;
-  for (int i = 1; i <= n; i++) {
-    a[i][0] = (a[i - 1][0] + a[i - 1][1] * 2) % md;
-    a[i][1] = (a[i - 1][0] + a[i - 1][1]) % md;
+  a[1] = 3;
+  a[2] = 7;
+  for (int i = 3; i <= n; i++) {
+    a[i] = (2 * a[i - 1] + a[i- 2]) % 9901;
   }
-  printf("%d\n", a[n][0]);
+  printf("%d\n", a[n]);
   return 0;
 }

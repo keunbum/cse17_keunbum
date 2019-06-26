@@ -16,39 +16,27 @@ public class Main {
     solver.solve(1, in, out);
     out.close();
   }
-
   static class TaskA {
-    static final int N = 10001;
     public void solve(int testNumber, InputReader in, PrintWriter out) {
-      int[][] a = new int[3][N];
-      int n = in.nextInt();
-      for (int i = 1; i <= n; i++) {
-       a[0][i] = in.nextInt();
-       a[1][i] = a[0][i];
-       a[2][i] = a[0][i];
+      int m = in.nextInt();
+      int a = 1;
+      while (m-- > 0) {
+        int x = in.nextInt();
+        int y = in.nextInt();
+        if (x == a) a = y; else
+        if (y == a) a = x;
       }
-      a[0][2] += a[1][1];
-      for (int i = 3; i <= n; i++) {
-        a[0][i] += Math.max(a[1][i - 1], a[2][i - 1]);
-        a[1][i] += max3(a[0][i - 2], a[1][i - 2], a[2][i - 2]);
-        a[2][i] += max3(a[0][i - 3], a[1][i - 3], a[2][i - 3]);
-      }
-      out.println(Math.max(max3(a[0][n], a[1][n], a[2][n]), max3(a[0][n-1], a[1][n-1], a[2][n-1])));
-    }
-    public int max3(int a, int b, int c) {
-      return Math.max(a, Math.max(b, c));
+      out.println(a);
     }
   }
 
   static class InputReader {
     public BufferedReader reader;
     public StringTokenizer tokenizer;
-
     public InputReader(InputStream stream) {
       reader = new BufferedReader(new InputStreamReader(stream), 32768);
       tokenizer = null;
     }
-
     public String next() {
       while (tokenizer == null || !tokenizer.hasMoreTokens()) {
         try {
@@ -59,7 +47,6 @@ public class Main {
       }
       return tokenizer.nextToken();
     }
-
     public int nextInt() {
       return Integer.parseInt(next());
     }

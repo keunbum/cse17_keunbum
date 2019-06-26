@@ -17,7 +17,27 @@ public class Main {
     out.close();
   }
   static class TaskA {
+    static int[] a;
     public void solve(int testNumber, InputReader in, PrintWriter out) {
+      int n = in.nextInt();
+      int m = in.nextInt();
+      a = new int[n + 1];
+      for (int i = 0; i <= n; i++) {
+        a[i] = i;
+      }
+      while (m-- > 0) {
+        char x = in.next().charAt(0);
+        int y = in.nextInt();
+        int z = in.nextInt();
+        if (x == '0') {
+          a[get(y)] = get(z);
+        } else {
+          out.println(get(y) == get(z) ? "YES" : "NO");
+        }
+      }
+    }
+    static int get(int x) {
+      return x == a[x] ? x : (a[x] = get(a[x]));
     }
   }
 

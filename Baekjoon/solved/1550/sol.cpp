@@ -5,14 +5,11 @@ using namespace std;
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(0);
-  string s;
-  cin >> s;
+  char c;
   int ans = 0;
-  int n = (int) s.size();
-  for (int i = n - 1, e = 1; i >= 0; i--, e *= 16) {
-    s[i] -= s[i] >= 'A' ? 'A' - 10 : '0';
-    ans += s[i] * e;
+  while ((c = cin.get()) != '\n') {
+    ans = ans * 16 + (c >= '0' && c <= '9' ? c - '0' : c - 'A' + 10);
   }
-  cout << ans << '\n';
+  cout << ans << endl;
   return 0;
 }

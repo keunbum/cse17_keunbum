@@ -18,6 +18,19 @@ public class Main {
   }
   static class TaskA {
     public void solve(int testNumber, InputReader in, PrintWriter out) {
+      String[] input = in.next().split(":");
+      int n = Integer.parseInt(input[0]);
+      int m = Integer.parseInt(input[1]);
+      int g = gcd(n, m);
+      out.println(n / g + ":" + m / g);
+    }
+    static int gcd(int a, int b) {
+      while (b > 0) {
+        int t = a % b;
+        a = b;
+        b = t;
+      }
+      return a;
     }
   }
 

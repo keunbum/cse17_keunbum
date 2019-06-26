@@ -4,12 +4,10 @@
 int main() {
   char s[7];
   scanf("%s", s);
-  int n = strlen(s);
   int ans = 0;
-  for (int i = n - 1, e = 1; i >= 0; i--, e *= 16) {
-    s[i] -= s[i] >= 'A' ? 'A' - 10 : '0';
-    ans += s[i] * e;
-  } 
+  for (int i = 0; s[i]; i++) {
+    ans = ans * 16 + s[i] + (s[i] >= '0' && s[i] <= '9' ? -'0' : -'A' + 10);
+  }
   printf("%d\n", ans);
   return 0;
 }          

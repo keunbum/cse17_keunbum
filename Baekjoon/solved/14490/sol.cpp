@@ -11,6 +11,5 @@ int main() {
   cin >> n >> c >> m;
   g = __gcd(n, m);
   cout << n / g << c << m / g << '\n';
-//cerr << (float)clock()/CLOCKS_PER_SEC << " seconds." << '\n';
   return 0;
 }
