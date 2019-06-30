@@ -28,6 +28,5 @@ int main() {
     if (comp(i, k)) cnt++;
   }
   cout << cnt << '\n';
-//cerr << (float)clock()/CLOCKS_PER_SEC << " seconds." << '\n';
   return 0;
 }

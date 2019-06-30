@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.StringTokenizer;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 
 public class Main {
   public static void main(String[] args) {
@@ -18,6 +19,35 @@ public class Main {
   }
   static class Task {
     public void solve(int testNumber, InputReader in, PrintWriter out) {
+      int n = in.nextInt();
+      int k = in.nextInt();
+      int[][] a = new int[n][n];
+      int dir = 0;
+      int x = 0;
+      int y = 0;
+      for (int i = n * n; i > 0; i--) {
+        a[x][y] = i;
+        int u = x + "2101".charAt(dir) - '1';
+        int v = y + "1210".charAt(dir) - '1';
+        if (u < 0 || u >= n || v < 0 || v >= n || a[u][v] > 0) {
+          dir = (++dir) & 3;
+        }
+        x += "2101".charAt(dir) - '1';
+        y += "1210".charAt(dir) - '1';
+      }
+      int p = 0;
+      int q = 0;
+      for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+          out.print(a[i][j] + " ");
+          if (a[i][j] == k) {
+            p = i + 1;
+            q = j + 1;
+          }
+        }
+        out.println();
+      }
+      out.println(p + " " + q);
     }
   }
 
