@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 import java.math.*;
 
-public class Main {
+public class Sol {
   public static void main(String[] args) {
     InputStream inputStream = System.in;
     OutputStream outputStream = System.out;
@@ -14,6 +14,27 @@ public class Main {
   }
   static class Task {
     public void solve(int testNumber, InputReader in, PrintWriter out) {
+      int n = in.nextInt();
+      int m = in.nextInt();
+      for (int i = 1; i < m; i++) {
+        int b = i;
+        int a = m - b;
+        boolean ok = true;
+        for (int j = n - 3; j >= 1; j--) {
+          int t = b - a;
+          b = a;
+          a = t;
+          if (a < 0) {
+            ok = false;
+            break;
+          }
+        }
+        if (ok && a < b) {
+          out.println(a);
+          out.println(b);
+          break;
+        }
+      }
     }
   }
 

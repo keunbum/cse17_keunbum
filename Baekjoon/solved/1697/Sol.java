@@ -1,53 +1,55 @@
-import java.io.OutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
-import java.util.StringTokenizer;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.util.*;
+import java.math.*;
 
-public class Main {
+public class Sol {
   public static void main(String[] args) {
     InputStream inputStream = System.in;
     OutputStream outputStream = System.out;
     InputReader in = new InputReader(inputStream);
     PrintWriter out = new PrintWriter(outputStream);
-    TaskA solver = new TaskA();
+    Task solver = new Task();
     solver.solve(1, in, out);
     out.close();
   }
-
-  static class TaskA {
+  static class Task {
+    static final int MAX = (int) 1e5;
     public void solve(int testNumber, InputReader in, PrintWriter out) {
-      int d = in.nextInt();
+      int n = in.nextInt();
       int k = in.nextInt();
-      int[] a = new int[31];
-      a[d] = k;
-      int i, j;
-      for (i = 1; i < k; i++) {
-        a[d - 1] = i;
-        for (j = d - 2; j >= 1; j--) {
-          a[j] = a[j + 2] - a[j + 1];
-          if (a[j] <= 0)
-            break;
-        }
-        if (j == 0 && a[1] <= a[2])
+      int[] a = new int[MAX + 1];
+      a[n] = 1;
+      List<Integer> que = new ArrayList<>();
+      que.add(n);
+      for (int i = 0; i < que.size(); i++) {
+        int x = que.get(i);
+        if (x == k) {
           break;
+        }
+        if (x - 1 >= 0 && a[x - 1] == 0) {
+          a[x - 1] = a[x] + 1;
+          que.add(x - 1);
+        }
+        if (x + 1 <= MAX && a[x + 1] == 0) {
+          a[x + 1] = a[x] + 1;
+          que.add(x + 1);
+        }
+        if (x * 2 <= MAX && a[x * 2] == 0) {
+          a[x * 2] = a[x] + 1;
+          que.add(x * 2);
+        }
       }
-      out.println(a[1]);
-      out.println(a[2]);
+      out.println(a[k] - 1);
     }
   }
 
   static class InputReader {
     public BufferedReader reader;
     public StringTokenizer tokenizer;
-
     public InputReader(InputStream stream) {
       reader = new BufferedReader(new InputStreamReader(stream), 32768);
       tokenizer = null;
     }
-
     public String next() {
       while (tokenizer == null || !tokenizer.hasMoreTokens()) {
         try {
@@ -58,7 +60,6 @@ public class Main {
       }
       return tokenizer.nextToken();
     }
-
     public int nextInt() {
       return Integer.parseInt(next());
     }

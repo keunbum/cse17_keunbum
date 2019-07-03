@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 import java.math.*;
 
-public class Main {
+public class Sol {
   public static void main(String[] args) {
     InputStream inputStream = System.in;
     OutputStream outputStream = System.out;
@@ -14,6 +14,19 @@ public class Main {
   }
   static class Task {
     public void solve(int testNumber, InputReader in, PrintWriter out) {
+      int n = in.nextInt();
+      int ans = 1;
+      if (n > 1) {
+        n -= 1;
+        for (int i = 1; ; i++) {
+          if (n <= 6 * i) {
+            ans = i + 1;
+            break;
+          }
+          n -= 6 * i;
+        }
+      }
+      out.println(ans);
     }
   }
 

@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 import java.math.*;
 
-public class Main {
+public class Sol2 {
   public static void main(String[] args) {
     InputStream inputStream = System.in;
     OutputStream outputStream = System.out;
@@ -14,6 +14,31 @@ public class Main {
   }
   static class Task {
     public void solve(int testNumber, InputReader in, PrintWriter out) {
+      int n = in.nextInt();
+      int[] a = new int[n];
+      for (int i = 0; i < n; i++) {
+        a[i] = in.nextInt();
+      }
+      int x = 0;
+      int[] ans = new int[n];
+      for (int i = 0; i < n; i++) {
+        int j = max_index(a, n);
+        a[j] = 1234;
+        ans[j] = x++;
+      }
+      for (int t : ans) {
+        out.print(t + " ");
+      }
+      out.println();
+    }
+    static int max_index(int[] a, int n) {
+      int j = 0;
+      for (int i = 1; i < n; i++) {
+        if (a[i] < a[j]) {
+          j = i;
+        }
+      }
+      return j;
     }
   }
 

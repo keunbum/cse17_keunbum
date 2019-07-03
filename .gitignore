@@ -1,0 +1,8 @@
+*.class
+*.exe
+in*
+out*
+ans*
+err*
+.git
+*.txt

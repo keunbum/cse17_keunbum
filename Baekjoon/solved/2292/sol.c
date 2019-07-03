@@ -8,6 +8,5 @@ int main() {
     sum += 6 * (i + 1);
   }
   printf("%d\n", i + 1);
-//fprintf(stderr, "%f seconds.\n", (float)clock()/CLOCKS_PER_SEC);
   return 0;
 }

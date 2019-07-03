@@ -14,6 +14,19 @@ public class Main {
   }
   static class Task {
     public void solve(int testNumber, InputReader in, PrintWriter out) {
+      int n = in.nextInt();
+      if (n <= 1) {
+        out.println(n);
+        return;
+      }
+      BigInteger a = BigInteger.ZERO;
+      BigInteger b = BigInteger.ONE;
+      for (int i = 2; i <= n; i++) {
+        BigInteger t = a.add(b);
+        a = b;
+        b = t;
+      }
+      out.println(b);
     }
   }
 

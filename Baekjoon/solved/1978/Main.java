@@ -12,40 +12,38 @@ public class Main {
     OutputStream outputStream = System.out;
     InputReader in = new InputReader(inputStream);
     PrintWriter out = new PrintWriter(outputStream);
-    TaskA solver = new TaskA();
+    Task solver = new Task();
     solver.solve(1, in, out);
     out.close();
   }
-
-  static class TaskA {
+  static class Task {
     public void solve(int testNumber, InputReader in, PrintWriter out) {
-      int d = in.nextInt();
       int n = in.nextInt();
-      int[] t = new int[31];
-      t[1] = t[2] = 1;
-      for (int i = 3; i < 31; i++)
-        t[i] = t[i - 2] + t[i - 1];
-      int a, b = 1;
-      for (a = 1; a < n / 2 + 1; a++) {
-        if (((n - a * t[d - 2]) % t[d - 1]) == 0) {
-          b = (n - a * t[d - 2]) / t[d - 1];
-          break;
+      int ans = n;
+      while (n-- > 0) {
+        int a = in.nextInt();
+        if (a == 1) {
+          ans--;
+          continue;
+        }
+        for (int i = 2; i * i <= a; i++) {
+          if (a % i == 0) {
+            ans--;
+            break;
+          }
         }
       }
-      out.println(a);
-      out.println(b);
+      out.println(ans);
     }
   }
 
   static class InputReader {
     public BufferedReader reader;
     public StringTokenizer tokenizer;
-
     public InputReader(InputStream stream) {
       reader = new BufferedReader(new InputStreamReader(stream), 32768);
       tokenizer = null;
     }
-
     public String next() {
       while (tokenizer == null || !tokenizer.hasMoreTokens()) {
         try {
@@ -56,7 +54,6 @@ public class Main {
       }
       return tokenizer.nextToken();
     }
-
     public int nextInt() {
       return Integer.parseInt(next());
     }

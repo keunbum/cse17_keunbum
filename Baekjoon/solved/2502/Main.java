@@ -14,6 +14,22 @@ public class Main {
   }
   static class Task {
     public void solve(int testNumber, InputReader in, PrintWriter out) {
+      int n = in.nextInt();
+      int v = in.nextInt();
+      n--;
+      int[] fibo = new int[n + 1];
+      fibo[0] = fibo[1] = 1;
+      for (int i = 2; i <= n; i++) {
+        fibo[i] = fibo[i - 1] + fibo[i - 2];
+      }
+      for (int a = 1; ; a++) {
+        if ((v - a * fibo[n - 2]) % fibo[n - 1] == 0) {
+          int b = (v - a * fibo[n - 2]) / fibo[n - 1];
+          out.println(a);
+          out.println(b);
+          break;
+        }
+      }
     }
   }
 

@@ -13,7 +13,27 @@ public class Main {
     out.close();
   }
   static class Task {
+    static final int inf = (int) 1e9;
     public void solve(int testNumber, InputReader in, PrintWriter out) {
+      int n = in.nextInt();
+      int m = in.nextInt();
+      int[] a = new int[n + 1];
+      for (int i = 0; i < n; i++) {
+        a[i] = in.nextInt();
+      }
+      int[] b = new int[m + 1];
+      for (int i = 0; i < m; i++) {
+        b[i] = in.nextInt();
+      }
+      int ia = 0, ib = 0;
+      a[n] = b[m] = inf;
+      while (ia < n || ib < m) {
+        if (a[ia] > b[ib]) {
+          out.print(b[ib++] + " ");
+        } else {
+          out.print(a[ia++] + " ");
+        }
+      }
     }
   }
 
