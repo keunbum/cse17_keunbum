@@ -14,6 +14,5 @@ int main() {
     cin >> a[i];
   sort(a.begin(), a.end());
   cout << a[k-1] << '\n';
-//cerr << (float)clock()/CLOCKS_PER_SEC << " seconds." << '\n';
   return 0;
 }
