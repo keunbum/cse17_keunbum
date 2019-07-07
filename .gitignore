@@ -6,3 +6,4 @@ ans*
 err*
 .git
 *.txt
+.gitignore
