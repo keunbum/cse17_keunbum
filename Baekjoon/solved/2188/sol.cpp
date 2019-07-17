@@ -32,9 +32,9 @@ int main() {
   int n, m;
   cin >> n >> m;
   a.resize(n);
-  pa = vector<int>(n, -1);
-  pb = vector<int>(m, -1);
-  was = vector<int>(n, 0);
+  pa.resize(n, -1);
+  pb.resize(m, -1);
+  was.resize(n, 0);
   for (int i = 0; i < n; i++) {
     int s;
     cin >> s;
