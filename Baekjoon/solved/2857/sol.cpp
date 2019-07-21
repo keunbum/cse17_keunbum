@@ -2,7 +2,7 @@
 
 using namespace std;
 
-bool ok, ans[6];
+bool ok;
 
 int main() {
   ios::sync_with_stdio(false);

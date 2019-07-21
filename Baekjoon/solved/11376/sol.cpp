@@ -35,7 +35,7 @@ int main() {
     for (int u : g[v]) {
       if (was[pb[u]] != iter) {
         if (dfs(pb[u], 0) || dfs(pb[u], 1)) {
-          pa[v][k] = 0;
+          pa[v][k] = u;
           pb[u] = v;
           return 1;
         }
