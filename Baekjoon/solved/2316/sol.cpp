@@ -4,21 +4,19 @@
 using namespace std;
 
 struct edge {
-  int from, to, f;
+  int from, to, c, f;
 };
 
-const int inf = (int) 1e9;
-
-int n, st, fin, flow;
+int n, st, fin;
 vector<edge> edges;
 vector<vector<int>> g;
 vector<int> d, q, ptr;
 
-void add(int from, int to, int cap) {
+void add(int from, int to) {
   g[from].push_back((int) edges.size());
-  edges.push_back({from, to, cap});
+  edges.push_back({from, to, 1, 0});
   g[to].push_back((int) edges.size());
-  edges.push_back({to, from, 0});
+  edges.push_back({to, from, 0, 0});
 }
 
 bool expath() {
@@ -31,11 +29,9 @@ bool expath() {
     for (int id : g[i]) {
       const edge &e = edges[id];
       const edge &back = edges[id ^ 1];
-      if (back.f > 0 && d[e.to] == -1) {
+      if (back.c > back.f && d[e.to] == -1) {
         d[e.to] = d[i] + 1;
-        if (e.to == st) {
-          return true;
-        }
+        if (e.to == st) return true;
         q[end++] = e.to;
       }
     }
@@ -51,11 +47,11 @@ int dfs(int v, int w) {
   while (j >= 0) {
     int id = g[v][j--];
     const edge &e = edges[id];
-    if (e.f > 0 && d[e.to] == d[v] - 1) {
-      int t = dfs(e.to, min(e.f, w));
+    if (e.c > e.f && d[e.to] == d[v] - 1) {
+      int t = dfs(e.to, min(e.c - e.f, w));
       if (t > 0) {
-        edges[id].f -= t;
-        edges[id ^ 1].f += t;
+        edges[id].f += t;
+        edges[id ^ 1].f -= t;
         return t;
       }
     }
@@ -64,22 +60,18 @@ int dfs(int v, int w) {
 }
 
 int max_flow() {
-  flow = 0;
+  int flow = 0;
   while (expath()) {
     for (int i = 0; i < n; i++) {
       ptr[i] = (int) g[i].size() - 1;
     }
     int big_add = 0;
     while (true) {
-      int add = dfs(st, inf);
-      if (add == 0) {
-        break;
-      }
+      int add = dfs(st, (int) 1e9);
+      if (add == 0) break;
       big_add += add;
     }
-    if (big_add == 0) {
-      break;
-    }
+    if (big_add == 0) break;
     flow += big_add;
   }
   return flow;
@@ -90,26 +82,22 @@ int main() {
   cin.tie(0);
   int N, M;
   cin >> N >> M;
-  st = 0; fin = N + M + 1;
-  n = N + M + 2;
+  st = 1; fin = 2;
+  n = 2 * N;
   g.resize(n);
   d.resize(n);
   q.resize(n);
   ptr.resize(n);
-  for (int i = 1; i <= N; i++) {
-    add(st, i, 2);
+  while (M--) {
+    int x, y;
+    cin >> x >> y;
+    x--; y--;
+    x *= 2; y *= 2;
+    add(x + 1 , y);
+    add(y + 1, x);
   }
-  for (int i = 1; i <= M; i++) {
-    add(N + i, fin, 1);
-  }
-  for (int i = 1; i <= N; i++) {
-    int t;
-    cin >> t;
-    while (t--) {
-      int j;
-      cin >> j;
-      add(i, N + j, 1);
-    }
+  for (int i = 0; i < N; i++) {
+    add(2 * i, 2 * i + 1);
   }
   cout << max_flow() << '\n';
   return 0;
