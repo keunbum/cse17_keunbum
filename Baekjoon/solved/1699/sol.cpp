@@ -1,10 +1,9 @@
 #include <iostream>
-#include <algorithm>
 #include <cmath>
 
 using namespace std;
 
-int a[123456];
+int f[123456];
 
 int main() {
   ios::sync_with_stdio(false);
@@ -12,13 +11,11 @@ int main() {
   int n;
   cin >> n;
   for (int i = 1; i <= n; i++) {
-    a[i] = i;
-    int j = (int) sqrt(i);
-    for ( ; j >= 1; j--) {
-      a[i] = min(a[i], a[i - j * j] + 1);
+    f[i] = i;
+    for (int j = (int) sqrt(i); j >= 1; j--) {
+      f[i] = min(f[i], f[i - j * j] + 1);
     }
   }
-  cout << a[n] << '\n';
-//cerr << (float)clock() / CLOCKS_PER_SEC << " seconds" << '\n';
+  cout << f[n] << '\n';
   return 0;
 }

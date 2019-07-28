@@ -7,8 +7,9 @@ int a[1234][3];
 
 bool comp(int x, int y) {
   for (int i = 0; i < 3; i++) {
-    if (a[x][i] == a[y][i]) continue;
-    return a[x][i] > a[y][i];
+    if (a[x][i] != a[y][i]) {
+      return a[x][i] > a[y][i];
+    }
   }
   return false;
 }
