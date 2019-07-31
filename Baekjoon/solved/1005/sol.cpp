@@ -3,7 +3,7 @@
 
 using namespace std;
 
-const int N = 1234;
+const int N = 1001;
 
 int T[N], M[N], deg[N], ans[N];
 
@@ -15,10 +15,8 @@ int main() {
   while (tt--) {
     int n, m;
     cin >> n >> m;
-    fill_n(M, n + 1, 0);
-    fill_n(deg, n + 1,0);
-    fill_n(ans, n + 1, 0);
     for (int i = 1; i <= n; i++) {
+      M[i] = deg[i] = ans[i] = 0;
       cin >> T[i];
     }
     vector<vector<int>> g(n + 1);
@@ -32,11 +30,10 @@ int main() {
     int w;
     cin >> w;
     vector<int> q;
-    q.push_back(0);
     for (int i = 1; i <= n; i++) {
       if (deg[i] == 0) {
-        g[0].push_back(i);
-        deg[i] = 1;
+        ans[i] = T[i];
+        q.push_back(i);
       }
     }
     for (int i = 0; i < (int) q.size(); i++) {
