@@ -1,10 +1,12 @@
 #include <iostream>
-#include <vector>
+#include <list>
 
 using namespace std;
 
-int ans[123456];
-vector<vector<int>> g;
+const int N = 123456;
+
+int ans[N];
+list<int> g[N];
 
 void dfs(int v) {
   for (int u : g[v]) {
@@ -20,7 +22,6 @@ int main() {
   cin.tie(0);
   int n;
   cin >> n;
-  g.resize(n + 1);
   for (int i = 0; i < n - 1; i++) {
     int x, y;
     cin >> x >> y;
