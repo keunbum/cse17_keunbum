@@ -27,7 +27,7 @@ int main() {
         continue;
       }
       depth[u] = depth[v] + 1;
-      pv[u] = v; // parent
+      pv[u] = v; // pointing parent
       Dfs(u);
     }
     en[v] = (int) order.size() - 1;
@@ -46,27 +46,19 @@ int main() {
     for (int i = 0; i < n; i++) {
       pr[i].resize(h);
       pr[i][0] = pv[i];
-      // the ancestor just above(2^0 = 1th) is the parent
+      // the ancestor just above(2^0 = 1) is the parent
     }
     for (int j = 1; j < h; j++) {
       for (int i = 0; i < n; i++) {
         pr[i][j] = pr[i][j - 1] == -1 ? -1 : pr[pr[i][j - 1]][j - 1];
       }
     }
-    
-    for (int i = 0; i < n; i++) {
-      cerr << i << "'s 2^k-th anc:";
-      for (int j = 0; j < h; j++) {
-        cerr << ' ' << pr[i][j];
-      }
-      cerr << '\n';
-    }
-    
+    // my 2^k-th ancestor is my 2^(k - 1)-th ancestor's 2^(k - 1)-th ancestor
   };
   Build();
   auto Anc = [&](int x, int y) {
     return pos[x] <= pos[y] && en[y] <= en[x];
-    // x is y's ancestor
+    // if x is y's ancestor then return true
   };
   auto Lca = [&](int x, int y) {
     if (Anc(x, y)) {
@@ -77,8 +69,8 @@ int main() {
     }
     if (depth[x] > depth[y]) {
       swap(x, y);
-    }
-    for (int j = h - 1; j >= 0; j--) {
+    } // optimization
+    for (int j = (int) log2(depth[x]); j >= 0; j--) {
       if (pr[x][j] != -1 && !Anc(pr[x][j], y)) {
         x = pr[x][j];
       }
