@@ -52,8 +52,9 @@ int main() {
     }
     fill(was.begin(), was.end(), false);
     for (int i = 0; i < n; i++) {
-      if (c[i] == 0 && !was[i]) {
+      if (c[i] == 0) {
         Dfs1(i);
+        break;
       }
     }
     bool ok = true;
