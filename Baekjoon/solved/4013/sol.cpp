@@ -116,5 +116,6 @@ int main() {
 			ans = max(ans, dp[c[x]] + c_val[c[x]]);
 		}
 	}
-	return !printf("%d\n", ans);
+	cout << ans << '\n';
+	return 0;
 }
