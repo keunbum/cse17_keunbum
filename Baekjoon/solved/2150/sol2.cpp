@@ -18,9 +18,9 @@ int main() {
 	vector<int> order;
 	vector<bool> was(n, false);
 	function<void(int)> Dfs1 = [&](int v) {
+		was[v] = true;
 		for (int u : g[v]) {
 			if (!was[u]) {
-				was[u] = true;
 				Dfs1(u);
 			}
 		}
@@ -28,16 +28,15 @@ int main() {
 	};
 	for (int i = 0; i < n; i++) {
 		if (!was[i]) {
-			was[i] = true;
 			Dfs1(i);
 		}
 	}
 	fill(was.begin(), was.end(), false);
 	vector<vector<int>> ans;
 	function<void(int)> Dfs2 = [&](int v) {
+		was[v] = true;
 		for (int u : g_rev[v]) {
 			if (!was[u]) {
-				was[u] = true;
 				ans.back().push_back(u);
 				Dfs2(u);
 			}
@@ -46,7 +45,6 @@ int main() {
 	for (int i = n - 1; i >= 0; i--) {
 		int v = order[i];
 		if (!was[v]) {
-			was[v] = true;
 			ans.push_back(vector<int>(1, v));
 			Dfs2(v);
 		}
