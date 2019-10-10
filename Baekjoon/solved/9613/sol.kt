@@ -3,10 +3,9 @@ private fun readInt() = readLn().toInt() // single int
 private fun readStrings() = readLn().split(" ") // list of strings
 private fun readInts() = readStrings().map { it.toInt() } // list of ints
 
+private fun gcd(a : Int, b: Int): Int = if (a == 0) b else gcd(b % a, a)
+
 fun main(args: Array<String>) {
-	fun Gcd(a: Int, b: Int): Int {
-		return if (a == 0) b else Gcd(b % a, a)
-	}
 	var tt = readInt()
 	while (tt-- > 0) {
 		var a = readInts()
@@ -14,7 +13,7 @@ fun main(args: Array<String>) {
 		var ans = 0L
 		for (i in 1..n) {
 			for (j in i+1..n) {
-				ans += Gcd(a[i], a[j]);
+				ans += gcd(a[i], a[j]);
 			}
 		}
 		println(ans)
