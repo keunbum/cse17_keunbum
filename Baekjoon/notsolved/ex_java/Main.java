@@ -1,43 +1,44 @@
 import java.io.*;
 import java.util.*;
 import java.math.*;
-
+ 
 public class Main {
-	public static void main(String[] args) {
-		InputStream inputStream = System.in;
-		OutputStream outputStream = System.out;
-		InputReader in = new InputReader(inputStream);
-		PrintWriter out = new PrintWriter(outputStream);
-		Task solver = new Task();
-		solver.solve(1, in, out);
+	void solve() {
+	}
+	FastScanner in;
+	PrintWriter out;
+	
+	void run() {
+		in = new FastScanner();
+		out = new PrintWriter(System.out);
+		solve();
 		out.close();
 	}
-	
-	static class Task {
-		public void solve(int tt, InputReader in, PrintWriter out) {
-		}
-	}
-	
-	static class InputReader {
-		public BufferedReader reader;
-		public StringTokenizer tokenizer;
-		
-		public InputReader(InputStream stream) {
-			reader = new BufferedReader(new InputStreamReader(stream), 32768);
-		  tokenizer = null;
+ 
+	class FastScanner {
+		BufferedReader br;
+		StringTokenizer st;
+ 
+		public FastScanner() {
+			br = new BufferedReader(new InputStreamReader(System.in), 32768);
 		}
 		public String next() {
-			while (tokenizer == null || !tokenizer.hasMoreTokens()) {
+			while (st == null || !st.hasMoreTokens()) {
 				try {
-					tokenizer = new StringTokenizer(reader.readLine());
+					st = new StringTokenizer(br.readLine());
 				} catch (IOException e) {
-					throw new RuntimeException(e);
+						throw new RuntimeException(e);
 				}
 			}
-			return tokenizer.nextToken();
+			return st.nextToken();
 		}
+ 
 		public int nextInt() {
 			return Integer.parseInt(next());
 		}
+	}
+ 
+	public static void main(String[] args) {
+		new Main().run();
 	}
 }
