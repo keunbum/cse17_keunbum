@@ -12,24 +12,21 @@ int main() {
 	const int INF = 1e9;
 	int n;
 	cin >> n;
-	vector<vector<int>> g(n + 1), g_rev(n + 1);
+	vector<vector<int>> g(n + 1);
 	for (int i = 1; i <= n; i++) {
 		int u = i * 3;
 		if (u <= n) {
 			g[i].push_back(u);
-			g_rev[u].push_back(i);
 			deg[u]++;
 		}
 		u = i << 1;
 		if (u <= n) {
 			g[i].push_back(u);
-			g_rev[u].push_back(i);
 			deg[u]++;
 		}
 		u = i + 1;
 		if (u <= n) {
 			g[i].push_back(u);
-			g_rev[u].push_back(i);
 			deg[u]++;
 		}
 	}
@@ -52,11 +49,25 @@ int main() {
 		cout << n << ' '; 
 		int mn = INF;
 		int mi = -1;
-		for (int u : g_rev[n]) {
+		int u;
+		if (n % 3 == 0) {
+			u = n / 3;
 			if (mn > dp[u]) {
 				mn = dp[u];
 				mi = u;
 			}
+		}
+		if ((n & 1) == 0) {
+			u = n >> 1;
+			if (mn > dp[u]) {
+				mn = dp[u];
+				mi = u;
+			}
+		}
+		u = n - 1;
+		if (mn > dp[u]) {
+			mn = dp[u];
+			mi = u;
 		}
 		n = mi;
 	}
