@@ -4,7 +4,6 @@
 
 using namespace std;
  
-int a[21];
 vector<int> a1, a2;
 vector<pair<int, long long>> a3, a4;
 
@@ -13,6 +12,7 @@ int main() {
     cin.tie(0);
     int n, s;
     cin >> n >> s;
+    vector<int> a(n + 1);
     for (int i = 1; i <= n; i++) {
       cin >> a[i];
     }
@@ -20,7 +20,7 @@ int main() {
         cout << (a[1] == s ? 1 : 0) << '\n';
         return 0;
     }
-    int mi = n / 2;
+    int mi = n >> 1;
     a1.push_back(0);
     for (int i = 1; i <= mi; i++) {
         int t = (int) a1.size();
