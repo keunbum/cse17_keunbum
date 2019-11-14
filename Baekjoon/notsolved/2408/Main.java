@@ -3,26 +3,30 @@ import java.util.*;
 import java.math.*;
  
 public class Main {
-	BigInteger operate(BigInteger a, BigInteger b, String type) {
-		if (type == "+") return a.add(b);
-		if (type == "-") return a.subtract(b);
-		if (type == "*") return a.multiply(b);
-		if (type == "/") return a.divide(b);
-		return BigInteger.valueOf(-1);
+	public class Pair {
+		BigInteger n;
+		char type;
+		Pair(BigInteger n, char type) {
+			this.n = n;
+			this.type = type;
+		}
 	}
 	void solve() {
 		int n = in.nextInt();
+		Pair[] stk = new Pair[30];
+		int top = 0;
+		stk[top++] = Pair(BigInteger.ZERO, '+');
 		BigInteger ans = BigInteger.ZERO;
-		String type = "+";
 		for (int i = 0; i < n + n - 1; i++) {
 			if (i % 2 == 0) {
 				BigInteger foo = new BigInteger(in.next());
-				ans = operate(ans, foo, type);
+				char type = stk[top - 1].type;
+				if (top > 1) {
+					stk[top - 1].n = cal(stk[top - 1].n, foo, type);
 			} else {
-				type = in.next();
+				stk[top++].type = in.next().charAt(0);
 			}
 		}
-		out.println(ans);
 	}
 	
 	FastScanner in;
