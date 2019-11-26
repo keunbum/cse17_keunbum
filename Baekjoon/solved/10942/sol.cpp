@@ -4,6 +4,7 @@ using namespace std;
 
 const int N = 2000;
 
+int a[N];
 int dp[N][N];
 
 int main() {
@@ -11,7 +12,6 @@ int main() {
 	cin.tie(0);
 	int n;
 	cin >> n;
-	vector<int> a(n);
 	for (int i = 0; i < n; i++) {
 		cin >> a[i];
 	}
@@ -23,10 +23,7 @@ int main() {
 			return dp[x][y];
 		}
 		if (a[x] == a[y]) {
-			if (y - x <= 2) {
-				return dp[x][y] = 1;
-			}
-			return dp[x][y] = F(x + 1, y - 1);
+			return dp[x][y] = (y - x <= 2 ? 1 : F(x + 1, y - 1));
 		}
 		return dp[x][y] = 0;
 	};
@@ -34,9 +31,6 @@ int main() {
 		int x, y;
 		cin >> x >> y;
 		x--; y--;
-		if (x > y) {
-			swap(x, y);
-		}
 		cout << F(x, y) << '\n';
 	}
 	return 0;
