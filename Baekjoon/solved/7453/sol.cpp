@@ -145,6 +145,5 @@ int main() {
 		}
 	}
 	cout << ans << '\n';
-//	cerr << (double) clock() / CLOCKS_PER_SEC << '\n';
 	return 0;
 }
