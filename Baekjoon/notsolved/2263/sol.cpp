@@ -11,22 +11,26 @@ int B[N + 1];
 int ans[N];
 int an = 0;
 
-void Dfs(int st, int en) {
-  cerr << st << ' ' << en << '\n';
-  if (st == en) {
+inline int ToR(int i) { return i < 0 ? -1 : B[a[i]]; }
+inline int ToB(int i) { return i < 0 ? -1 : A[b[i]]; }
+
+void Dfs(int bb, int be, int rb, int re) {
+  if (rb >= re) {
     return;
   }
-  ans[an++] = b[en - 1];
-  if (st + 1 == en) {
+  ans[an++] = b[re - 1];
+  int pb = ToB(re - 1);
+  if (pb + 1 == be) {
+    Dfs(bb, pb, rb, re - 1);
     return;
   }
-  int i = A[b[en - 1]] - 1;
-  int v = a[i];
-  while (A[v] < A[b[en - 1]]) {
-    v = b[B[v] + 1];
+  int pp = pb++;
+  while (pb >= 0 && pb > ToB(re - 1)) {
+    pp = pb;
+    pb = ToB(ToR(pb) - 1);
   }
-  Dfs(0, B[v]);
-  Dfs(B[v], en - 1);
+  Dfs(bb, pp, rb, ToR(pp - 1) + 1);
+  Dfs(pp, ToB(re - 1), ToR(pp - 1) + 1, re - 1);
 }
 
 int main() {
@@ -42,7 +46,7 @@ int main() {
     cin >> b[i];
     B[b[i]] = i;
   }
-  Dfs(0, n);
+  Dfs(0, n, 0, n);
   for (int i = 0; i < an; i++) {
     if (i > 0) {
       cout << ' ';
