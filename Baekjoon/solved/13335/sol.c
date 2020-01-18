@@ -19,6 +19,7 @@ int main() {
   for (int i = 2; i <= n; i++) {
     int j;
     for (j = i - 1; j > 0; j--) {
+      printf("%d %d\n", i, j);
       if ((sum[i] - sum[j - 1]) > w) break;
     }
     ans[i] = max(ans[i - 1] + 1, ans[j] + l);
