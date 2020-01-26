@@ -16,4 +16,3 @@
 		$ans += (int) $ok;
 	}
 	echo $ans."\n";
-?>

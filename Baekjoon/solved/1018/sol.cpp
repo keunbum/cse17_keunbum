@@ -27,7 +27,7 @@ int main() {
       if (c == 'W') a[i][j] = true;
     }
   }
-  int ans = 64;
+  int ans = 32;
   for (int i = 8; i <= h; i++) {
     for (int j = 8; j <= w; j++) {
       ans = min(ans, count(i, j));
