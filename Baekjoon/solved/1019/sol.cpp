@@ -90,11 +90,9 @@ void debug_out(Head H, Tail... T) {
 #define debug(...) 42
 #endif
 
-vector<int> ans(10, 0);
-
 int main() {
   ios::sync_with_stdio(false);
-  cin.tie(0); ;
+  cin.tie(0);
   long long n;
   cin >> n;
 //  debug(n);
@@ -106,6 +104,7 @@ int main() {
     cout << '\n';
     return 0;
   }
+  vector<int> ans(10, 0);
   long long e = 10;
   bool ok = true;
   while (ok) {
