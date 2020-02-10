@@ -3,8 +3,10 @@
 using namespace std;
 
 struct St {
-  bool operator()(const pair<long long, long long>& a, const pair<long long, long long>& b) {
-    return a.second > b.second;
+  long long n;
+  long long dist;
+  bool operator<(const St& o) const {
+    return dist > o.dist;
   }
 };
 
@@ -24,14 +26,14 @@ int main() {
   long long n;
   cin >> n;
   if (n == 1) { cout << 0 << '\n'; return 0; }
-  priority_queue<pair<long long, long long>, vector<pair<long long, long long>>, St> s;
+  priority_queue<St> s;
   s.push({n, 0});
-  long long ans = n - 1;
+  long long ans = n;
   map<long long, long long> D;
   D[n] = 0;
   while (!s.empty()) {
-    long long i, dist;
-    tie(i, dist) = s.top();
+    long long i = s.top().n;
+    long long dist = s.top().dist;
     s.pop();
     if (dist != D[i]) {
       continue;
@@ -48,9 +50,12 @@ int main() {
         D[nn] = dist + cost + 1;
         s.push({nn, dist + cost + 1});
       }
+      if (nn == 1) {
+        break;
+      }
     }
   }
-  assert(ans != n - 1);
+  assert(ans != n);
   cout << ans << '\n';
   return 0;
 }
