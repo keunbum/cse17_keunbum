@@ -43,11 +43,15 @@ int main() {
     }
     max_len[v] = to_leaf[v];
     for (int i = 0; i < sz; i++) {
+      int x, xc;
+      tie(x, xc) = g[v][i];
+      if (x == p) {
+        continue;
+      }
       for (int j = i + 1; j < sz; j++) {
-        int x, xc, y, yc;
-        tie(x, xc) = g[v][i];
+        int y, yc;
         tie(y, yc) = g[v][j];
-        if (x == p || y == p) {
+        if (y == p) {
           continue;
         }
         max_len[v] = max(max_len[v], to_leaf[x] + to_leaf[y] + xc + yc);
