@@ -2,7 +2,23 @@
 
 using namespace std;
 
-const int MAXL = (int) 1e6 + 10;
+map<string, int> mp;
+vector<string> inv;
+vector<bool> is_num;
+vector<int> pid;
+
+int Idx(const string& s) {
+  auto it = mp.find(s);
+  if (it != mp.end()) {
+    return it->second;
+  }
+  int id = (int) inv.size();
+  mp[s] = id;
+  inv.push_back(s);
+  is_num.push_back(s.back() >= '0' && s.back() <= '9');
+  pid.push_back(id);
+  return id;
+}
 
 inline void False() {
   cout << "0==1\n";
@@ -12,22 +28,6 @@ inline void False() {
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(0);
-  map<string, int> mp;
-  vector<string> inv;
-  vector<bool> is_num;
-  vector<int> pid;
-  auto Idx = [&](const string& s) {
-    auto it = mp.find(s);
-    if (it != mp.end()) {
-      return it->second;
-    }
-    int id = (int) inv.size();
-    mp[s] = id;
-    inv.push_back(s);
-    is_num.push_back(s.back() >= '0' && s.back() <= '9');
-    pid.push_back(id);
-    return id;
-  };
   string s;
   cin >> s;
   int l = (int) s.size();
