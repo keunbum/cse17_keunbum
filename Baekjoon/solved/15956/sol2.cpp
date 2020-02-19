@@ -2,32 +2,13 @@
 
 using namespace std;
 
-map<string, int> mp;
-vector<string> inv;
-vector<bool> is_num;
-vector<int> pid;
-
-int Idx(const string& s) {
-  auto it = mp.find(s);
-  if (it != mp.end()) {
-    return it->second;
-  }
-  int id = (int) inv.size();
-  mp[s] = id;
-  inv.push_back(s);
-  is_num.push_back(s.back() >= '0' && s.back() <= '9');
-  pid.push_back(id);
-  return id;
-}
-
-inline void False() {
-  cout << "0==1\n";
-  exit(0);
-}
-
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(0);
+  auto False = [&]() {
+    cout << "0==1\n";
+    exit(0);
+  };
   string s;
   cin >> s;
   int l = (int) s.size();
@@ -38,6 +19,22 @@ int main() {
   bool former = true;
   vector<pair<int, int>> edges_a;
   vector<pair<int, int>> edges_b;
+  map<string, int> mp;
+  vector<string> inv;
+  vector<bool> is_num;
+  vector<int> pid;
+  auto Idx = [&](const string& s) {
+    auto it = mp.find(s);
+    if (it != mp.end()) {
+      return it->second;
+    }
+    int id = (int) inv.size();
+    mp[s] = id;
+    inv.push_back(s);
+    is_num.push_back(s.back() >= '0' && s.back() <= '9');
+    pid.push_back(id);
+    return id;
+  };
   for (int i = 0; i <= l; i++) {
     if (s[i] == '&') {
       int x = Idx(sa);
