@@ -6,16 +6,13 @@ int main() {
   ios::sync_with_stdio(false);
   cin.tie(0);
   cout.precision(9);
-  cout << fixed;
-  int n = 3;
-  double e = 2.5;
+  int n = 0;
+  double e = 0.;
   cout << "n e" << '\n';
   cout << "- -----------" << '\n';
-  cout << "0 1" << '\n';
-  cout << "1 2" << '\n';
-  cout << "2 2.5" << '\n';
-  for (int p = 6; n < 10; n++, p *= n) {
+  for (int p = 1; n < 10; n++, p *= n) {
     e += 1.0 / p;
+    if (n > 2) cout << fixed;
     cout << n << ' ' << e << '\n';
   }
   return 0;
