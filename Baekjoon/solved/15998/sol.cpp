@@ -5,8 +5,8 @@ using namespace std;
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(0);
-  auto End = [&](int ans) {
-    cout << ans << '\n';
+  auto Err = [&]() {
+    cout << "-1\n";
     exit(0);
   };
   int n;
@@ -19,13 +19,13 @@ int main() {
     cin >> a >> b;
     if (a > 0) {
       if (money + a != b) {
-        End(-1);
+        Err();
       }
     } else
     if (money + a != b) {
       long long mq = b - (money + a);
       if (mq < 0) {
-        End(-1);
+        Err();
       }
       M = __gcd(M, mq);
       b_max = max(b_max, b);
