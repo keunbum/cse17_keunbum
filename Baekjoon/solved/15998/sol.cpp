@@ -14,7 +14,7 @@ int main() {
   long long M = 0LL;
   long long money = 0LL;
   long long b_max = 0LL;
-  for (int i = 0; i < n; i++) {
+  while (n--) {
     long long a, b;
     cin >> a >> b;
     if (a > 0) {
