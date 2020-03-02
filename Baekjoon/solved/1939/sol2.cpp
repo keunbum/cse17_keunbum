@@ -28,9 +28,7 @@ int main() {
   for (const auto& e : edges) {
     int x, y, z;
     tie(x, y, z) = e;
-    x = Get(x);
-    y = Get(y);
-    p[x] = y;
+    p[Get(x)] = Get(y);
     if (Get(st) == Get(en)) {
       cout << z << '\n';
       break;
