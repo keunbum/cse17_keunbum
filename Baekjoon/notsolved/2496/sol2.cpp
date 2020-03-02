@@ -1,76 +1,48 @@
-#include <iostream>
-#include <functional>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-const int N = 123;
-
-int a[N], b[N];
-
 int main() {
-	ios::sync_with_stdio(false);
-	cin.tie(0);
-	int n, m, t, k;
-	cin >> n >> m >> t >> k;
-	n *= 2;
-	m *= 2;
-	k *= 2;
-	for (int i = 0; i < t; i++) {
-		int x, y;
-		cin >> x >> y;
-		x *= 2; y *= 2;
-		a[i] = x; b[i] = y;
-	}
-	int ans = 0;
-	int cx = -1;
-	int cy = -1;
-	function<void(int, int)> Cnt = [&](int x, int y) {
-		if (x & 1) {
-			Cnt(x + 1, y);
-		}
-		if (y & 1) {
-			Cnt(x, y + 1);
-		}
-		int cnt = 0;
-		for (int i = 0; i < t; i++) {
-			if (abs(x - a[i]) + abs(y - b[i]) <= k / 2) {
-				cnt++;
-			}
-		}
-		if (cnt > ans) {
-			ans = cnt;
-			cx = x;
-			cy = y;
-		}
-	};
-	for (int i = 0; i < t; i++) {
-		for (int j = 0; j < t; j++) {
-			int dd = (a[j] - a[i]) + (b[j] - b[i]);
-			int tx = a[i] + dd / 2;
-			int ty = b[i] + dd / 2;
-			if (dd >= 0) {
-				Cnt(tx - k / 2, ty);
-				Cnt(tx, ty - k / 2);
-			}
-			if (dd <= 0) {
-				Cnt(tx + k / 2, ty);
-				Cnt(tx, ty + k / 2);
-			}
-		}
-	}
-	if (cx < 0) {
-		cx = 0;
-	}
-	if (cx > n) {
-		cx = n;
-	}
-	if (cy < 0) {
-		cy = 0;
-	}
-	if (cy > m) {
-		cy = m;
-	}
-	cout << cx / 2 << ' ' << cy / 2 << '\n';
-	cout << ans << '\n';
-	return 0;	
+  ios::sync_with_stdio(false);
+  cin.tie(0);
+  int w, h, n, k;
+  cin >> w >> h >> n >> k;
+  vector<int> p(n);
+  vector<int> q(n);
+  for (int i = 0; i < n; i++) {
+    cin >> p[i] >> q[i];
+  }
+  auto IsIn = [&](int a, int x, int b) {
+    return a <= x && x <= b;
+  };
+  int ans = 0;
+  int ans_x = -1;
+  int ans_y = -1;
+  auto Update = [&](int a, int b) {
+    int cnt = 0;
+    for (int i = 0; i < n; i++) {
+      if (IsIn(a, p[i] + q[i], a + k) && IsIn(b, p[i] - q[i], b + k)) {
+        ++cnt;
+      }
+    }
+    if (cnt > ans) {
+      ans = cnt;
+      ans_x = (a + b) / 2 + k / 2;
+      ans_y = (a - b) / 2;
+    }
+  };
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < n; j++) {
+      int a = p[i] + q[i];
+      int b = p[j] - q[j];
+      if ((a + b) & 1) {
+        Update(a, b - 1);
+        Update(a, b + 1);
+      } else {
+        Update(a, b);
+      }
+    }
+  }
+  cout << ans_x << ' ' << ans_y << '\n' << ans << '\n';
+  return 0;
 }

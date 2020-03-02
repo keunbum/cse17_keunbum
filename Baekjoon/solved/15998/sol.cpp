@@ -35,6 +35,6 @@ int main() {
   if (M == 0LL) {
     M = 1LL;
   }
-  cout << (M > b_max ? M : -1) << '\n';
+  cout << (M > b_max ? M : -1LL) << '\n';
   return 0;
 }
