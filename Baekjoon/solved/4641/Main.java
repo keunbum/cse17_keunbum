@@ -4,20 +4,22 @@ import java.math.*;
  
 public class Main {
 	void solve() {
-		int[] a = new int[21];
-		for (int i = 1; i <= 20; i++) a[i] = i;
-		for (int i = 0; i < 10; i++) {
-			int x = in.nextInt();
-			int y = in.nextInt();
-			while (x < y) {
-				int t = a[x];
-				a[x] = a[y];
-				a[y] = t;
-				++x;
-				--y;
+		while (true) {
+			List<Integer> a = new ArrayList<>();
+			boolean[] was = new boolean[200];
+			while (true) {
+				int t = in.nextInt();
+				if (t == -1) return;
+				if (t == 0) break;
+				was[t] = true;
+				a.add(t);
 			}
-		}
-		for (int i = 1; i <= 20; i++) out.print(a[i] + " ");
+			int ans = 0;
+			for (int i = 0; i < a.size(); i++) {
+				if (was[a.get(i) * 2]) ++ans;
+			}
+			out.println(ans);
+		}	
 	}
 	
 	FastScanner in;

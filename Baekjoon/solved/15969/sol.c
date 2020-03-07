@@ -5,7 +5,7 @@ int main() {
   scanf("%d", &n);
   int mx = 0;
   int mn = 1000;
-  for (int i = 0; i < n; i++) {
+  while (n--) {
     int x;
     scanf("%d", &x);
     if (x < mn) mn = x;

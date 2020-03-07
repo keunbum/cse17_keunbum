@@ -1,13 +1,14 @@
 #include <stdio.h>
 
 int main() {
-  int a[20];
-  for (int i = 0; i < 20; i++) a[i] = i + 1;
+  int a[21];
+  for (int i = 1; i <= 20; i++) {
+    a[i] = i;
+  }
   int tt = 10;
   while (tt--)  {
     int x, y;
     scanf("%d %d", &x, &y);
-    --x; --y;
     while (x < y) {
       int t = a[y];
       a[y] = a[x];
@@ -16,7 +17,8 @@ int main() {
       --y;
     }
   }
-  for (int i = 0; i < 19; i++) printf("%d ", a[i]);
-  printf("%d\n", a[19]);
+  for (int i = 1; i <= 20; i++) {
+    printf("%d ", a[i]);
+  }
   return 0;
 }

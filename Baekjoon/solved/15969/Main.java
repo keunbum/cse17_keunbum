@@ -4,20 +4,15 @@ import java.math.*;
  
 public class Main {
 	void solve() {
-		int[] a = new int[21];
-		for (int i = 1; i <= 20; i++) a[i] = i;
-		for (int i = 0; i < 10; i++) {
+		int n = in.nextInt();
+		int max = 0;
+		int min = 1000;
+		while (n-- > 0) {
 			int x = in.nextInt();
-			int y = in.nextInt();
-			while (x < y) {
-				int t = a[x];
-				a[x] = a[y];
-				a[y] = t;
-				++x;
-				--y;
-			}
+			max = Math.max(max, x);
+			min = Math.min(min, x);
 		}
-		for (int i = 1; i <= 20; i++) out.print(a[i] + " ");
+		out.println(max - min);
 	}
 	
 	FastScanner in;
@@ -38,6 +33,7 @@ public class Main {
 			br = new BufferedReader(new InputStreamReader(System.in), 32768);
 			st = null;
 		}
+
 		public String next() {
 			while (st == null || !st.hasMoreTokens()) {
 				try {
