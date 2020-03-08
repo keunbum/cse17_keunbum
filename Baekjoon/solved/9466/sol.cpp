@@ -20,18 +20,16 @@ int main() {
     vector<bool> chk(n, false);
     function<void(int v)> Dfs = [&](int v) {
       was[v] = (int) st.size();
+      st.push_back(v);
       if (was[to[v]] >= 0) {
-        st.push_back(v);
         for (int i = was[to[v]]; i < (int) st.size(); i++) {
           chk[st[i]] = true;
         }
-        st.pop_back();
       } else
       if (was[to[v]] == -1) {
-        st.push_back(v);
         Dfs(to[v]);
-        st.pop_back();
       }
+      st.pop_back();
       was[v] = -2;
     };
     for (int i = 0; i < n; i++) {
