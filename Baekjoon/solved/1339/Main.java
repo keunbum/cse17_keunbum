@@ -3,7 +3,24 @@ import java.util.*;
 import java.math.*;
  
 public class Main {
+	static final int alpha = 26;
 	void solve() {
+		int n = in.nextInt();
+		int[] cnt = new int[alpha];
+		while (n-- > 0) {
+			char[] s = in.next().toCharArray();
+			int e = 1;
+			for (int i = s.length - 1; i >= 0; i--) {
+				cnt[s[i] - 'A'] += e;
+				e *= 10;
+			}	
+		}
+		Arrays.sort(cnt);
+		int ans = 0;
+		for (int i = 0; i < 10; i++) {
+			ans += cnt[i + 16] * i;
+		}
+		out.println(ans);	
 	}
 	
 	FastScanner in;
@@ -24,11 +41,6 @@ public class Main {
 			br = new BufferedReader(new InputStreamReader(System.in), 32768);
 			st = null;
 		}
-
-		public String nextLn() {
-			return br.readLine();
-		}
-
 		public String next() {
 			while (st == null || !st.hasMoreTokens()) {
 				try {

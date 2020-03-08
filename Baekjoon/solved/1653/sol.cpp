@@ -123,7 +123,7 @@ int main() {
   };
   vector<long long> ss;
   ss.push_back(0LL);
-  for (int val = 1; val <= 105; val++) {
+  for (int val = 1; val <= 115; val++) {
     vector<int> v;
     vector<vector<int>> vs;
     Dfs(v, val, 0, vs);
@@ -161,7 +161,7 @@ int main() {
       }
     }
   }
-  long long k;
+  int k;
   cin >> k;
   sort(ss.begin(), ss.end());
 //  debug(ss);
