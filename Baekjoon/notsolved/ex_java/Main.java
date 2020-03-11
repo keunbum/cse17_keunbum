@@ -26,7 +26,11 @@ public class Main {
 		}
 
 		public String nextLn() {
-			return br.readLine();
+			try {
+				return br.readLine();
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}	
 		}
 
 		public String next() {
