@@ -12,7 +12,7 @@ inline int dis(pair<int, int> a, pair<int, int> b) {
   return abs(a.first - b.first) + abs(a.second - b.second);
 }
 
-void bt(int m, vector<int> a) {
+void bt(int m, vector<int>& a) {
   int n = a.size();
   int hn = h.size();
   if (m == n) {
