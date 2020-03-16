@@ -3,23 +3,35 @@ import java.util.*;
 import java.math.*;
  
 public class Main {
+	int dfs(int v, int[] dp, int[] cost, List<Integer>[] graph) {
+		if (dp[v] >= 0) return dp[v];
+		int max = 0;
+		for (int u : graph[v]) {
+			max = Math.max(max, dfs(u, dp, cost, graph));
+		}  
+		return dp[v] = max + cost[v];
+	}
+
 	void solve() {
-		int n = in.nextInt();
-		int m = in.nextInt();
-		int[] a = new int[n + 1];
-		for (int i = 0; i < n; i++) a[i] = in.nextInt();
-		int[] b = new int[m + 1];
-		for (int i = 0; i < m; i++) b[i] = in.nextInt();
-		a[n] = b[m] = (int) 1e9;
-		int p_a = 0, p_b = 0;
-		while (p_a < n || p_b < m) {
-			if (a[p_a] < b[p_b]) {
-				out.print(a[p_a] + " ");
-				++p_a;
-			} else {
-				out.print(b[p_b] + " ");
-				++p_b;
-			}	
+		int tt = in.nextInt();
+		while (tt-- > 0) {
+			int n = in.nextInt();
+			int k = in.nextInt();
+			int[] cost = new int[n];
+			int[] dp = new int[n];
+			List<Integer>[] graph = new List[n];
+			for (int i = 0; i < n; i++) {
+				cost[i] = in.nextInt();
+				dp[i] = -1;
+				graph[i] = new ArrayList<>();
+			}
+			while (k-- > 0) {
+				int x = in.nextInt() - 1;
+				int y = in.nextInt() - 1;
+				graph[y].add(x);
+			}
+			int w = in.nextInt() - 1;
+			out.println(dfs(w, dp, cost, graph));
 		}
 	}
 	

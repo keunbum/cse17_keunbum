@@ -3,23 +3,39 @@ import java.util.*;
 import java.math.*;
  
 public class Main {
+	class Vertex {
+		int cost;
+		int totalCost;
+		List<Vertex> adj = new ArrayList<>();
+
+		int dfs() {
+			if (totalCost >= 0) return totalCost;
+			int max = 0;
+			for (Vertex u : adj) {
+				max = Math.max(max, u.dfs());
+			}
+			return totalCost = max + cost;
+		}
+	}
+		
 	void solve() {
-		int n = in.nextInt();
-		int m = in.nextInt();
-		int[] a = new int[n + 1];
-		for (int i = 0; i < n; i++) a[i] = in.nextInt();
-		int[] b = new int[m + 1];
-		for (int i = 0; i < m; i++) b[i] = in.nextInt();
-		a[n] = b[m] = (int) 1e9;
-		int p_a = 0, p_b = 0;
-		while (p_a < n || p_b < m) {
-			if (a[p_a] < b[p_b]) {
-				out.print(a[p_a] + " ");
-				++p_a;
-			} else {
-				out.print(b[p_b] + " ");
-				++p_b;
+		int tt = in.nextInt();
+		while (tt-- > 0) {
+			int n = in.nextInt();
+			int k = in.nextInt();
+			Vertex[] vs = new Vertex[n];
+			for (int i = 0; i < n; i++) {
+				vs[i] = new Vertex();
+				vs[i].cost = in.nextInt();
+				vs[i].totalCost = -1;
 			}	
+			while (k-- > 0) {
+				Vertex a = vs[in.nextInt() - 1];
+				Vertex b = vs[in.nextInt() - 1];
+				b.adj.add(a);
+			}
+			int w = in.nextInt() - 1;
+			out.println(vs[w].dfs());
 		}
 	}
 	

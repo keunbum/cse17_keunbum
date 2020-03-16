@@ -10,15 +10,13 @@ int main() {
     int i;
     int top = 0;
     for (i = 0; s[i]; i++) {
-      if (s[i] == '(' || s[i] == '[') {
-        st[top++] = s[i];
-      } else
+      if (s[i] == '(' || s[i] == '[') st[top++] = s[i]; else
       if (s[i] == ']') {
         if (!top || st[top - 1] != '[') break;
         --top;
       } else
       if (s[i] == ')') {
-        if (!top && st[top - 1] != '(') break;
+        if (!top || st[top - 1] != '(') break;
         --top;
       }
     }

@@ -3,26 +3,39 @@ import java.util.*;
 import java.math.*;
  
 public class Main {
-	void solve() {
-		int n = in.nextInt();
-		int m = in.nextInt();
-		int[] a = new int[n + 1];
-		for (int i = 0; i < n; i++) a[i] = in.nextInt();
-		int[] b = new int[m + 1];
-		for (int i = 0; i < m; i++) b[i] = in.nextInt();
-		a[n] = b[m] = (int) 1e9;
-		int p_a = 0, p_b = 0;
-		while (p_a < n || p_b < m) {
-			if (a[p_a] < b[p_b]) {
-				out.print(a[p_a] + " ");
-				++p_a;
-			} else {
-				out.print(b[p_b] + " ");
-				++p_b;
-			}	
+	class Fraction {
+		int x;
+		int y;
+
+		public Fraction(int a, int b, int c, int d) {
+			this.x = a * d + b * c;
+			this.y = c * d;
 		}
 	}
-	
+
+	int compare(Fraction a, Fraction b) {
+		return a.x * b.y - b.x * a.y;
+	}	
+
+	void solve() {
+		int a = in.nextInt();
+		int b = in.nextInt();
+		int c = in.nextInt();
+		int d = in.nextInt();
+		List<Fraction> f = new ArrayList<>();
+		f.add(new Fraction(a, b, c, d));
+		f.add(new Fraction(c, a, d, b));
+		f.add(new Fraction(d, c, b, a));
+		f.add(new Fraction(b, d, a, c));
+		int cur_i = 0;
+		for (int i = 1; i < 4; i++) {
+			if (compare(f.get(cur_i), f.get(i)) < 0) {
+				cur_i = i;
+			}	
+		}
+		out.println(cur_i);
+	}
+		
 	FastScanner in;
 	PrintWriter out;
 	

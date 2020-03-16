@@ -1,21 +1,6 @@
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
 
 using namespace std;
-
-const int N = 1001;
-
-int T[N], dp[N];
-vector<vector<int>> g;
-
-int dfs(int n) { // 재귀적으로 탐색 그러나 한번 탐색한 값은 dp이용
-  if (dp[n] >= 0) return dp[n]; // 저장 되어 있다
-  int mx = 0; // 아무리 작아봤자 0
-  for (int u : g[n]) {
-    mx = max(mx, dfs(u));
-  }
-  return dp[n] = T[n] + mx;
-}
 
 int main() {
   ios::sync_with_stdio(false);
@@ -23,22 +8,43 @@ int main() {
   int tt;
   cin >> tt;
   while (tt--) {
-    int n, m;
-    cin >> n >> m;
-    g.clear();
-    g.resize(n + 1);
-    for (int i = 1; i <= n; i++) {
-      dp[i] = -1;
-      cin >> T[i];
+    int n, k;
+    cin >> n >> k;
+    vector<int> cost(n);
+    for (int i = 0; i < n; i++) {
+      cin >> cost[i];
     }
-    while (m--) {
+    vector<vector<int>> g(n);
+    vector<int> deg(n, 0);
+    while (k--) {
       int x, y;
       cin >> x >> y;
-      g[y].push_back(x);
+      --x; --y;
+      g[x].push_back(y);
+      ++deg[y];
+    }
+    vector<int> dp(n, 0);
+    vector<int> que;
+    for (int v = 0; v < n; v++) {
+      if (deg[v] == 0) {
+        dp[v] += cost[v];
+        que.push_back(v);
+      }
+    }
+    for (int i = 0; i < (int) que.size(); i++) {
+      int v = que[i];
+      for (int u : g[v]) {
+        dp[u] = max(dp[u], dp[v]);
+        if (--deg[u] == 0) {
+          dp[u] += cost[u];
+          que.push_back(u);
+        }
+      }
     }
     int w;
     cin >> w;
-    cout << dfs(w) << '\n';
+    --w;
+    cout << dp[w] << '\n';
   }
   return 0;
 }

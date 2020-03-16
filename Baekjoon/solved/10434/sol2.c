@@ -32,12 +32,7 @@ int main() {
   while (tt--) {
     int qq, m;
     scanf("%d %d", &qq, &m);
-    printf("%d %d ", qq, m);
-    if (IsPrime(m) && Get(m) == 1) {
-      puts("YES");
-    } else {
-      puts("NO");
-    }
+    printf("%d %d %s\n", qq, m, IsPrime(m) && Get(m) == 1 ? "YES" : "NO");
   }
   return 0;
 }

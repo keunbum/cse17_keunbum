@@ -4,23 +4,23 @@ import java.math.*;
  
 public class Main {
 	void solve() {
-		int n = in.nextInt();
-		int m = in.nextInt();
-		int[] a = new int[n + 1];
-		for (int i = 0; i < n; i++) a[i] = in.nextInt();
-		int[] b = new int[m + 1];
-		for (int i = 0; i < m; i++) b[i] = in.nextInt();
-		a[n] = b[m] = (int) 1e9;
-		int p_a = 0, p_b = 0;
-		while (p_a < n || p_b < m) {
-			if (a[p_a] < b[p_b]) {
-				out.print(a[p_a] + " ");
-				++p_a;
-			} else {
-				out.print(b[p_b] + " ");
-				++p_b;
-			}	
+		int a = in.nextInt();
+		int b = in.nextInt();
+		int min = a + b;
+		int max = a + b;
+		int e = 1;
+		while (a > 0 && b > 0) {
+			int A = a % 10;
+			int B = b % 10;
+			if (A == 5) max += e; else
+			if (A == 6) min -= e;
+			if (B == 5) max += e; else
+			if (B == 6) min -= e;
+			a /= 10;
+			b /= 10;
+			e *= 10;
 		}
+		out.println(min + " " + max);
 	}
 	
 	FastScanner in;

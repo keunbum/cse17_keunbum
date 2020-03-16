@@ -4,22 +4,26 @@ import java.math.*;
  
 public class Main {
 	void solve() {
-		int n = in.nextInt();
-		int m = in.nextInt();
-		int[] a = new int[n + 1];
-		for (int i = 0; i < n; i++) a[i] = in.nextInt();
-		int[] b = new int[m + 1];
-		for (int i = 0; i < m; i++) b[i] = in.nextInt();
-		a[n] = b[m] = (int) 1e9;
-		int p_a = 0, p_b = 0;
-		while (p_a < n || p_b < m) {
-			if (a[p_a] < b[p_b]) {
-				out.print(a[p_a] + " ");
-				++p_a;
-			} else {
-				out.print(b[p_b] + " ");
-				++p_b;
-			}	
+		while (true) {
+			String s = in.nextLn();
+			int n = s.length();
+			if (n == 1) break;
+			int[] st = new int[n];
+			int sp = 0;
+			int i;
+			for (i = 0; i < n; i++) {
+				char ch = s.charAt(i);
+				if (ch == '[' || ch == '(') st[sp++] = ch; else
+				if (ch == ']') {
+					if (sp == 0 || st[sp - 1] != '[') break;
+					--sp;
+				} else
+				if (ch == ')') {
+					if (sp == 0 || st[sp - 1] != '(') break;
+					--sp;
+				}
+			}
+			out.println((i == n && sp == 0) ? "yes" : "no");
 		}
 	}
 	

@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <string.h>
-#include <assert.h>
 
 #define MAX 10000
 
@@ -25,16 +24,17 @@ int main() {
       puts("NO");
       continue;
     }
-    for (int i = 0; i < 6; i++) {
+    int x = m;
+    for (int i = 0; i < 200; i++) {
       int t = 0;
-//      printf("m = %d\n", m);
-      while (m) {
-        t += (m % 10) * (m % 10);
-        m /= 10;
+//      printf("x = %d\n", x);
+      while (x) {
+        t += (x % 10) * (x % 10);
+        x /= 10;
       }
-      m = t;
+      x = t;
     }
-    puts(m == 1 ? "YES" : "NO");
+    puts(x == 1 ? "YES" : "NO");
   }
   return 0;
 }

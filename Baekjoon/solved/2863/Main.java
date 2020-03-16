@@ -3,26 +3,36 @@ import java.util.*;
 import java.math.*;
  
 public class Main {
-	void solve() {
-		int n = in.nextInt();
-		int m = in.nextInt();
-		int[] a = new int[n + 1];
-		for (int i = 0; i < n; i++) a[i] = in.nextInt();
-		int[] b = new int[m + 1];
-		for (int i = 0; i < m; i++) b[i] = in.nextInt();
-		a[n] = b[m] = (int) 1e9;
-		int p_a = 0, p_b = 0;
-		while (p_a < n || p_b < m) {
-			if (a[p_a] < b[p_b]) {
-				out.print(a[p_a] + " ");
-				++p_a;
-			} else {
-				out.print(b[p_b] + " ");
-				++p_b;
-			}	
+	class Fraction {
+		int x;
+		int y;
+		int id;
+
+		public Fraction(int a, int b, int c, int d, int id) {
+			this.x = a * d + b * c;
+			this.y = c * d;
+			this.id = id;
 		}
 	}
-	
+
+	void solve() {
+		int a = in.nextInt();
+		int b = in.nextInt();
+		int c = in.nextInt();
+		int d = in.nextInt();
+		List<Fraction> f = new ArrayList<>();
+		f.add(new Fraction(a, b, c, d, 0));
+		f.add(new Fraction(c, a, d, b, 1));
+		f.add(new Fraction(d, c, b, a, 2));
+		f.add(new Fraction(b, d, a, c, 3));
+		Collections.sort(f, new Comparator<Fraction>() {
+			public int compare(Fraction n1, Fraction n2) {
+				return n1.x * n2.y - n2.x * n1.y;
+			}
+		});
+		out.println(f.get(3).id);
+	}
+		
 	FastScanner in;
 	PrintWriter out;
 	

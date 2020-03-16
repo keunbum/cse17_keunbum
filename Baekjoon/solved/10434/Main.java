@@ -4,24 +4,35 @@ import java.math.*;
  
 public class Main {
 	void solve() {
-		int n = in.nextInt();
-		int m = in.nextInt();
-		int[] a = new int[n + 1];
-		for (int i = 0; i < n; i++) a[i] = in.nextInt();
-		int[] b = new int[m + 1];
-		for (int i = 0; i < m; i++) b[i] = in.nextInt();
-		a[n] = b[m] = (int) 1e9;
-		int p_a = 0, p_b = 0;
-		while (p_a < n || p_b < m) {
-			if (a[p_a] < b[p_b]) {
-				out.print(a[p_a] + " ");
-				++p_a;
-			} else {
-				out.print(b[p_b] + " ");
-				++p_b;
-			}	
+		int tt = in.nextInt();
+		while (tt-- > 0) {
+			int qq = in.nextInt();
+			int m = in.nextInt();
+			out.println(qq + " " + m + (isPrime(m) && isHappy(m) ? " YES" : " NO"));
 		}
 	}
+
+	boolean isPrime(int n) {
+		if (n < 2) return false;
+		for (int i = 2; i * i <= n; i++) {
+			if (n % i == 0) return false;
+		}
+		return true;
+	}
+
+	boolean isHappy(int m) {
+		Set<Integer> was = new HashSet<>();
+		do {
+			was.add(m);
+			int t = 0;
+			while (m > 0) {
+				t += (m % 10) * (m % 10);
+				m /= 10;
+			}
+			m = t;	
+		} while (!was.contains(m));
+		return m == 1;
+	}	
 	
 	FastScanner in;
 	PrintWriter out;
