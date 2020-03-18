@@ -12,7 +12,7 @@ char s[HW][HW];
 int qx[MAX];
 int qy[MAX];
 
-void RunBfs(const char[HW][HW], int sx, int sy, vector<vector<int>>& dist) {
+void RunBfs(const char s[HW][HW], int sx, int sy, vector<vector<int>>& dist) {
   int h = dist.size();
   int w = dist[0].size();
   for (int i = 0; i < h; i++) {
