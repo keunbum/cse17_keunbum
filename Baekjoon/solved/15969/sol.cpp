@@ -1,21 +1,15 @@
-#include <iostream>
-#include <algorithm>
+#include <bits/stdc++.h>
 
 using namespace std;
+
+int a[1234];
 
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(0);
   int n;
   cin >> n;
-  int mx = 0;
-  int mn = 1000;
-  while (n--) {
-    int x;
-    cin >> x;
-    mx = max(mx, x);
-    mn = min(mn, x);
-  }
-  cout << mx - mn << '\n';
+  for (int i = 0; i < n; i++) cin >> a[i];
+  cout << (*max_element(a, a + n) - *min_element(a, a + n)) << '\n';
   return 0;
 }

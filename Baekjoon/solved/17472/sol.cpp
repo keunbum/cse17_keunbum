@@ -2,109 +2,107 @@
 
 using namespace std;
 
+const int DX[4] = {1, 0, -1, 0};
+const int DY[4] = {0, 1, 0, -1};
+
 struct Edge {
   int from;
   int to;
   int cost;
+
   bool operator<(const Edge& o) {
     return cost < o.cost;
   }
 };
 
-int main() {
-  ios::sync_with_stdio(false);
-  cin.tie(0);
-  const int DX[4] = {0, 1, 0, -1};
-  const int DY[4] = {1, 0, -1, 0};
-  int n, m;
-  cin >> n >> m;
-  auto IsIn = [&](int x, int y) { return x >= 0 && x < n && y >= 0 && y < m; };
-  vector<vector<int>> a(n, vector<int>(m));
-  for (int i = 0; i < n; i++) {
-    for (int j = 0; j < m; j++) {
-      cin >> a[i][j];
-    }
-  }
-  vector<vector<int>> grid(n, vector<int>(m));
-  int cnt = 0;
-  function<void(int, int)> Dfs = [&](int x, int y) {
+int IsIn(int x, int y, int h, int w) {
+  return x >= 0 && y >= 0 && x < h && y < w;
+}
+
+int Get(int v, vector<int>& p) {
+  return v == p[v] ? v : (p[v] = Get(p[v], p));
+}
+
+void Bfs(vector<vector<int>>& a, int sx, int sy) {
+  int h = (int) a.size();
+  int w = (int) a[0].size();
+  vector<pair<int, int>> q;
+  q.emplace_back(sx, sy);
+  for (int i = 0; i < (int) q.size(); i++) {
+    int x, y;
+    tie(x, y) = q[i];
     for (int dir = 0; dir < 4; dir++) {
       int nx = x + DX[dir];
       int ny = y + DY[dir];
-      if (IsIn(nx, ny) && a[nx][ny] == 1 && grid[nx][ny] == 0) {
-        grid[nx][ny] = grid[x][y];
-        Dfs(nx, ny);
-      }
-    }
-  };
-  for (int i = 0; i < n; i++) {
-    for (int j = 0; j < m; j++) {
-      if (a[i][j] == 1 && grid[i][j] == 0) {
-        grid[i][j] = ++cnt;
-        Dfs(i, j);
+      if (IsIn(nx, ny, h, w) && a[nx][ny] == -1) {
+        a[nx][ny] = a[sx][sy];
+        q.emplace_back(nx, ny);
       }
     }
   }
+}
 
-  for (int i = 0; i < n; i++) {
-    for (int j = 0; j < m; j++) {
-      if (j > 0) {
-        cerr << ' ';
-      }
-      cerr << grid[i][j];
+int main() {
+  ios::sync_with_stdio(false);
+  cin.tie(0);
+  int h, w;
+  cin >> h >> w;
+  vector<vector<int>> a(h, vector<int>(w));
+  for (int i = 0; i < h; i++) {
+    for (int j = 0; j < w; j++) {
+      cin >> a[i][j];
+      a[i][j] -= 2;
     }
-    cerr << '\n';
+  }
+  int v_cnt = 0;
+  for (int i = 0; i < h; i++) {
+    for (int j = 0; j < w; j++) {
+      if (a[i][j] == -1) {
+        a[i][j] = v_cnt++;
+        Bfs(a, i, j);
+      }
+    }
   }
   vector<Edge> edges;
-  for (int i = 0; i < n; i++) {
-    for (int j = 0; j < m; j++) {
-      if (a[i][j] == 0) {
+  for (int sx = 0; sx < h; sx++) {
+    for (int sy = 0; sy < w; sy++) {
+      if (a[sx][sy] == -2) {
         continue;
       }
       for (int dir = 0; dir < 2; dir++) {
-        int l = 0;
-        int nx = i + DX[dir];
-        int ny = j + DY[dir];
-        while (IsIn(nx, ny) && a[nx][ny] == 0) {
-          l++;
-          nx += DX[dir];
-          ny += DY[dir];
+        int cx = sx + DX[dir];
+        int cy = sy + DY[dir];
+        int len = 0;
+        while (IsIn(cx, cy, h, w) && a[cx][cy] == -2) {
+          ++len;
+          cx += DX[dir];
+          cy += DY[dir];
         }
-        if (l >= 2 && IsIn(nx, ny)) {
-          edges.push_back({grid[i][j], grid[nx][ny], l});
+        if (IsIn(cx, cy, h, w) && len >= 2) {
+          edges.push_back({a[sx][sy], a[cx][cy], len});
         }
       }
     }
   }
-  
-  for (const Edge& e : edges) {
-    cerr << e.from << ' ' << e.to << ' ' << e.cost << '\n';
-  }
   sort(edges.begin(), edges.end());
-  vector<int> p(cnt + 1);
+  vector<int> p(v_cnt);
   iota(p.begin(), p.end(), 0);
-  function<int(int)> Get = [&](int x) {
-    return (x == p[x] ? x : p[x] = Get(p[x]));
-  };
   int ans = 0;
-  for (const Edge& e: edges) {
-    int F = Get(e.from);
-    int T = Get(e.to);
-    if (F != T) {
+  for (const Edge& e : edges) {
+    int x = Get(e.from, p);
+    int y = Get(e.to, p);
+    if (x != y) {
+      p[x] = y;
       ans += e.cost;
-      p[F] = T;
     }
   }
   bool ok = true;
-  for (int i = 1; i < cnt; i++) {
-    if (Get(i) != Get(i + 1)) {
+  int root = Get(0, p);
+  for (int i = 1; i < v_cnt; i++) {
+    if (Get(i, p) != root) {
       ok = false;
       break;
     }
-  }
-  
-  for (int i = 1; i <= cnt; i++) {
-    cerr << i << ": " << p[i] << '\n';
   }
   cout << (ok ? ans : -1) << '\n';
   return 0;
